@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS brands (
 
 CREATE TABLE IF NOT EXISTS cars (
   id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  category_id INT REFERENCES categories ( id ),
-  brand_id INT REFERENCES brands ( id ),
+  category_id INT REFERENCES categories ( id ) ON DELETE CASCADE,
+  brand_id INT REFERENCES brands ( id ) ON DELETE CASCADE,
   name VARCHAR ( 100 ) NOT NULL,
   model_year INT,
   price DECIMAL ( 10, 2 ),
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS cars (
 
 CREATE TABLE IF NOT EXISTS car_specifications (
   id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  car_id INT REFERENCES cars ( id ),
+  car_id INT REFERENCES cars ( id ) ON DELETE CASCADE,
   weight_kg INT,
   length_mm INT,
   width_mm INT,
