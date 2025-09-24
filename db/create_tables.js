@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS brands (
   id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name VARCHAR ( 100 ) NOT NULL,
-  COUNTRY VARCHAR ( 40 ),
+  country VARCHAR ( 40 ),
   founded_year INT,
   description TEXT
 );
