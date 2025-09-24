@@ -4,7 +4,7 @@ async function createCategory(name, description) {
   const query = "INSERT INTO categories (name, description) VALUES ( $1 , $2 )";
   const params = [name, description];
 
-  runGetQuery(query, params);
+  await runQuery(query, params);
 }
 
 async function getAllCategories() {
