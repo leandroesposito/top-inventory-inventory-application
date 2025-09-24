@@ -1,8 +1,8 @@
 const { runQuery, runGetQuery } = require("./queries");
 
-async function createCategory(category, description) {
+async function createCategory(name, description) {
   const query = "INSERT INTO categories (name, description) VALUES ( $1 , $2 )";
-  const params = [category, description];
+  const params = [name, description];
 
   runGetQuery(query, params);
 }
