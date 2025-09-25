@@ -1,20 +1,21 @@
 const { runQuery, runGetQuery } = require("./queries");
 
 async function createCategory(name, description) {
-  const query = "INSERT INTO categories (name, description) VALUES ( $1 , $2 )";
+  const query =
+    "INSERT INTO categories (name, description) VALUES ( $1 , $2 );";
   const params = [name, description];
 
   await runQuery(query, params);
 }
 
 async function getAllCategories() {
-  const query = "SELECT (id, name, description) FROM categories";
+  const query = "SELECT (id, name, description) FROM categories;";
 
   return await runGetQuery(query);
 }
 
 async function getCategoryById(id) {
-  const query = "SELECT * FROM categories WHERE id = $1";
+  const query = "SELECT * FROM categories WHERE id = $1;";
   const params = [id];
 
   const categories = await runGetQuery(query, params);
@@ -24,14 +25,14 @@ async function getCategoryById(id) {
 
 async function updateCategory(id, { name, description }) {
   const query =
-    "UPDATE categories SET name = $1 , description = $2 WHERE id = $3";
+    "UPDATE categories SET name = $1 , description = $2 WHERE id = $3;";
   const params = [name, description, id];
 
   await runQuery(query, params);
 }
 
 async function deleteCategory(id) {
-  const query = "DELETE FROM categories WHERE id = $1";
+  const query = "DELETE FROM categories WHERE id = $1;";
   const params = [id];
 
   await runQuery(query, params);
