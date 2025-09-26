@@ -26,7 +26,7 @@ async function createCar(carData) {
       top_speed, acceleration_0_60, transmission, drivetrain, fuel_type,
       engine_size, seats, color, in_stock, stock_quantity)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
-      $16, $17);`;
+      $16, $17) RETURNING id;`;
   const params = [
     category_id,
     brand_id,
@@ -47,7 +47,8 @@ async function createCar(carData) {
     stock_quantity,
   ];
 
-  await runQuery(query, params);
+  const rows = await runQuery(query, params);
+  return rows[0].id;
 }
 
 async function getAllCars() {
