@@ -49,6 +49,14 @@ async function getCarSpecsById(id) {
   return carSpecs[0];
 }
 
+async function getCarSpecsByCarId(carId) {
+  const query = "SELECT * FROM car_specifications WHERE car_id = $1";
+  const params = [carId];
+
+  const carSpecs = await runGetQuery(query, params);
+  return carSpecs[0];
+}
+
 async function updateCarSpecs(id, carSpecsData) {
   const {
     car_id,
@@ -96,6 +104,7 @@ module.exports = {
   createCarSpecs,
   getAllCarsSpecs,
   getCarSpecsById,
+  getCarSpecsByCarId,
   updateCarSpecs,
   deleteCarSpecs,
 };
