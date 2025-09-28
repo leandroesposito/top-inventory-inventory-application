@@ -87,7 +87,7 @@ const carNewPost = [
 
     const newId = await carDB.createCar(newCar);
 
-    res.redirect(`/cars/${newId}`);
+    res.redirect(`/cars/view/${newId}`);
   },
 ];
 

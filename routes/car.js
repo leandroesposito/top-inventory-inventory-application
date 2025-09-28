@@ -11,6 +11,6 @@ const carRouter = Router();
 carRouter.get("/", carsGet);
 carRouter.get("/new", carNewGet);
 carRouter.post("/new", carNewPost);
-carRouter.get("/:id", carGet);
+carRouter.get("/view/:id", carGet);
 
 module.exports = carRouter;
