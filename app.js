@@ -7,10 +7,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const viewsFolder = "views";
+const assestFolder = "public";
 
 app.set("views", path.join(__dirname, viewsFolder));
 app.set("views engine", "ejs");
 
+app.use(express.static(path.join(__dirname, assestFolder)));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/cars", carRouter);
