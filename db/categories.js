@@ -9,7 +9,7 @@ async function createCategory(name, description) {
 }
 
 async function getAllCategories() {
-  const query = "SELECT (id, name, description) FROM categories;";
+  const query = "SELECT * FROM categories;";
 
   return await runGetQuery(query);
 }

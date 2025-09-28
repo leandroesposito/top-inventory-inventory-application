@@ -9,8 +9,7 @@ async function createBrand({ name, country, founded_year, description }) {
 }
 
 async function getAllBrands() {
-  const query =
-    "SELECT (id, name, country, founded_year, description) FROM brands;";
+  const query = "SELECT * FROM brands;";
 
   return await runGetQuery(query);
 }
