@@ -1,0 +1,43 @@
+<fieldset>
+  <legend>Specs</legend>
+  <div class="form-row">
+    <label for="weight-kg">Weight Kg</label>
+    <input type="text" id="weight-kg" name="weight-kg" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["weight_kg"] : "") %>" required>
+  </div>
+  <div class="form-row">
+    <label for="length-mm">Length mm</label>
+    <input type="text" id="length-mm" name="length-mm" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["length_mm"] : "") %>" required>
+  </div>
+  <div class="form-row">
+    <label for="width-mm">Width mm</label>
+    <input type="text" id="width-mm" name="width-mm" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["width_mm"] : "") %>" required>
+  </div>
+  <div class="form-row">
+    <label for="height-mm">Height mm</label>
+    <input type="text" id="height-mm" name="height-mm" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["height_mm"] : "") %>" required>
+  </div>
+  <div class="form-row">
+    <label for="fuel-capacity-l">Fuel capacity L</label>
+    <input type="text" id="fuel-capacity-l" name="fuel-capacity-l" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["fuel_capacity_l"] : "") %>" required>
+  </div>
+  <div class="form-row">
+    <label for="cargo-space-l">Cargo space L</label>
+    <input type="text" id="cargo-space-l" name="cargo-space-l" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["cargo_space_l"] : "") %>" required>
+  </div>
+  <div class="form-row">
+    <label for="warranty-years">Warranty Years</label>
+    <input type="text" id="warranty-years" name="warranty-years" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["warranty_years"] : "") %>" required>
+  </div>
+  <div class="form-row">
+    <label for="maintenance-interval-km">Maintenance interval Km</label>
+    <input type="text" id="maintenance-interval-km" name="maintenance-interval-km" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["maintenance_interval_km"] : "") %>" required>
+  </div>
+  <!--
+    button "add feature", onClick => include (feature(Input con boton eliminar));
+
+    https://ejs.co/#docs
+    buscar client side support
+
+
+  -->
+</fieldset>
