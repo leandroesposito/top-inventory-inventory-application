@@ -47,7 +47,7 @@ async function createCar(carData) {
     stock_quantity,
   ];
 
-  const rows = await runQuery(query, params);
+  const { rows } = await runQuery(query, params);
   return rows[0].id;
 }
 
