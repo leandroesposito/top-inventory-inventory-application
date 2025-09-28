@@ -6,6 +6,119 @@
     <title><%= title %></title>
   </head>
   <body>
-    New Car
+    <h1><%= title %></h1>
+    <form action="/cars/new" method="POST">
+      <div class="form-row">
+        <label for="category-id">Category</label>
+        <select name="category-id" id="category-id" required>
+          <% for(const category of locals.categories){ %>
+            <option value="<%= category.id %>">
+              <%= category.name %>
+            </option>
+          <% } %>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="brand-id">Brand</label>
+        <select name="brand-id" id="brand-id" required>
+          <% for(const brand of locals.brands){ %>
+            <option value="<%= brand.id %>">
+              <%= brand.name %>
+            </option>
+          <% } %>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required />
+      </div>
+      <div class="form-row">
+        <label for="model-year">Model Year</label>
+        <input
+          type="number"
+          name="model-year"
+          id="model-year"
+          min="1900"
+          max="<%= new Date().getFullYear() + 1 %>"
+          step="1"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="price">Price</label>
+        <input
+        type="text"
+        name="price"
+        id="price"
+        min="0"
+        max="99999999.99"
+        step="100"
+        required
+      />
+      </div>
+      <div class="form-row">
+        <label for="horsepower">Horsepower</label>
+        <input type="number" name="horsepower" id="horsepower" min="0" value="0" required />
+      </div>
+      <div class="form-row">
+        <label for="torque">Torque</label>
+        <input type="number" name="torque" id="torque" min="0" value="0" required />
+      </div>
+      <div class="form-row">
+        <label for="top-speed">Top Speed</label>
+        <input type="number" name="top-speed" id="top-speed" min="0" value="0" required />
+      </div>
+      <div class="form-row">
+        <label for="acceleration-0-60">Acceleration 0-60</label>
+        <input
+          type="number"
+          name="acceleration-0-60"
+          id="acceleration-0-60"
+          min="0"
+          max="99"
+          step="0.01"
+          value="0"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="transmission">Transmission</label>
+        <input type="text" maxlength="50" name="transmission" id="transmission" required />
+      </div>
+      <div class="form-row">
+        <label for="drivetrain">Drivetrain</label>
+        <input type="text" maxlength="50" name="drivetrain" id="drivetrain" required />
+      </div>
+      <div class="form-row">
+        <label for="fuel-type">Fuel Type</label>
+        <input type="text" maxlength="50" name="fuel-type" id="fuel-type" required />
+      </div>
+      <div class="form-row">
+        <label for="engine-size">Engine Size</label>
+        <input type="text" maxlength="50" name="engine-size" id="engine-size" required />
+      </div>
+      <div class="form-row">
+        <label for="seats">Seats</label>
+        <input type="number" name="seats" id="seats" min="0" max="10" value="0" required />
+      </div>
+      <div class="form-row">
+        <label for="color">Color</label>
+        <input type="text" maxlength="50" name="color" id="color" required />
+      </div>
+      <div class="form-row">
+        <label for="in-stock">In Stock</label>
+        <input type="checkbox" name="in-stock" id="in-stock" checked/>
+      </div>
+      <div class="form-row">
+        <label for="stock-quantity">Stock Quantity</label>
+        <input type="number" name="stock-quantity" id="stock-quantity" min="0" value="0" />
+      </div>
+      <div class="buttton-checkbox">
+        <label for="toggle-specs" class="toggle-specs-label">Add Specs</label>
+        <input type="checkbox" id="toggle-specs">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <script src="/scripts/cars_new_scripts.js"></script>
   </body>
 </html>
