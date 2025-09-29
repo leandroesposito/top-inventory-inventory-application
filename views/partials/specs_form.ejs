@@ -30,14 +30,38 @@
   </div>
   <div class="form-row">
     <label for="maintenance-interval-km">Maintenance interval Km</label>
-    <input type="text" id="maintenance-interval-km" name="maintenance-interval-km" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["maintenance_interval_km"] : "") %>" required>
+    <input id="maintenance-interval-km" name="specs[maintenance-interval-km]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["maintenance_interval_km"] : 0) %>" required>
   </div>
-  <!--
-    button "add feature", onClick => include (feature(Input con boton eliminar));
+  <div id="features">
+    <h2>Features</h2>
+    <div class="features-container">
+    </div>
+    <button type="button" class="add-feature-btn">Add feature</button>
+  </div>
+  <div class="">
 
-    https://ejs.co/#docs
-    buscar client side support
+  </div>
+  <script>
+    (function(){
+      const featuresContainer = document.querySelector(".features-container");
+      const addFeatureBtn = document.querySelector(".add-feature-btn");
+      const newFeatureTemplate = `
+        <input type="text" name="specs[features]">
+        <button class="delete-feature">Delete</button>
+      `;
 
+      addFeatureBtn.addEventListener("click", () => {
+        const newFeature = document.createElement("div");
+        newFeature.classList.add("feature-row");
+        newFeature.innerHTML = newFeatureTemplate;
+        featuresContainer.appendChild(newFeature);
 
-  -->
+        const deleteFeatureBtn = newFeature.querySelector(".delete-feature");
+        deleteFeatureBtn.addEventListener("click", () => {
+          featuresContainer.removeChild(newFeature);
+        })
+      })
+
+    })()
+  </script>
 </fieldset>
