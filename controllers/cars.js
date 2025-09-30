@@ -34,13 +34,13 @@ async function carsGet(req, res) {
 }
 
 const carGet = [
-  createIntChain("id"),
+  param("id").isInt({ min: 0 }),
   async function carGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res
         .status(400)
-        .render("cars.ejs", { title: "Cars", errors: errors.array() });
+        .render("car.ejs", { title: "Cars", errors: errors.array() });
     }
 
     const { id } = req.params;
