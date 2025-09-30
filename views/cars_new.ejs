@@ -7,6 +7,13 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <% if (locals.errors) { %>
+      <% for(const error of errors) { %>
+       <div class="error">
+        <%= error.msg %>
+       </div>
+      <% } %>
+    <% } %>
     <form action="/cars/new" method="POST">
       <div class="form-row">
         <label for="category-id">Category</label>
