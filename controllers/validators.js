@@ -4,7 +4,7 @@ const ERRORS = {
   INT: "must be integer",
   LENGTH: (maxLength) =>
     `must be at least 1 character and at most ${maxLength} characters`,
-  MAX: (max) => `must ve less tha ${max}`,
+  MAX: (max) => `must be over or equal to 0 and less than ${max}`,
   DECIMAL: (digits) => `must have ${digits} digits or none`,
 };
 
