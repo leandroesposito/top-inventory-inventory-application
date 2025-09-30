@@ -67,9 +67,14 @@ async function carNewGet(req, res) {
   const categories = await categoryDB.getAllCategories();
   const brands = await brandDB.getAllBrands();
 
-  res
-    .status(200)
-    .render("cars_new.ejs", { title: "New car", brands, categories });
+  res.status(200).render("cars_new.ejs", {
+    title: "New car",
+    brands,
+    categories,
+    errors: res.locals.errors,
+    car: res.locals.car,
+    specs: res.locals.specs,
+  });
 }
 
 const carNewPost = [
