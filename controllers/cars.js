@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+const { param, validationResult } = require("express-validator");
 const specsDB = require("../db/car_specifications");
 const carDB = require("../db/cars");
 const categoryDB = require("../db/categories");
