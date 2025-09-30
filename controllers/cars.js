@@ -27,6 +27,17 @@ const carValidations = [
   createTextChain("color", 50),
 ];
 
+const specsValidations = [
+  createIntChain("specs['weight-kg']"),
+  createIntChain("specs['length-mm']"),
+  createIntChain("specs['width-mm']"),
+  createIntChain("specs['height-mm']"),
+  createIntChain("specs['fuel-capacity-l']"),
+  createIntChain("specs['cargo-space-l']"),
+  createIntChain("specs['warranty-years']"),
+  createIntChain("specs['maintenance-interval-km']"),
+];
+
 async function carsGet(req, res) {
   const cars = await carDB.getAllCars();
 
@@ -63,6 +74,7 @@ async function carNewGet(req, res) {
 
 const carNewPost = [
   carValidations,
+  specsValidations,
   async function carNewPost(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
