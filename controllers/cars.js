@@ -46,7 +46,7 @@ const carGet = [
     const { id } = req.params;
 
     const car = await carDB.getCarById(id);
-    const specs = await carDB.getCarSpecsByCarId(id);
+    const specs = await specsDB.getCarSpecsByCarId(id);
 
     res.status(200).render("car.ejs", { title: car.name, car, specs });
   },
