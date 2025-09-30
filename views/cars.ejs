@@ -3,9 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><%= title %></title>
   </head>
   <body>
-    CARS
+    <h1><%= title %></h1>
+    <% if (locals.cars) { %>
+     <% for(const car of locals.cars) { %>
+      <div>
+        <a href="/cars/view/<%= car.id %>"> <%= car.name %> </a>
+      </div>
+     <% } %>
+    <% } %>
   </body>
 </html>
