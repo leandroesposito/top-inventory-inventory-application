@@ -76,13 +76,6 @@ const carNewPost = [
   carValidations,
   specsValidations,
   async function carNewPost(req, res) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .render("cars_new.ejs", { title: "New car", errors: errors.array() });
-    }
-
     const newCar = {
       category_id: req.body["category-id"],
       brand_id: req.body["brand-id"],
@@ -103,7 +96,31 @@ const carNewPost = [
       stock_quantity: req.body["stock-quantity"],
     };
 
+    const bodySpecs = req.body["specs"];
+    const newCarSpecs = {
+      weight_kg: bodySpecs["weight-kg"],
+      length_mm: bodySpecs["length-mm"],
+      width_mm: bodySpecs["width-mm"],
+      height_mm: bodySpecs["height-mm"],
+      fuel_capacity_l: bodySpecs["fuel-capacity-l"],
+      cargo_space_l: bodySpecs["cargo-space-l"],
+      warranty_years: bodySpecs["warranty-years"],
+      maintenance_interval_km: bodySpecs["maintenance-interval-km"],
+      features: JSON.stringify(bodySpecs["features"]),
+    };
+
+    console.log(req.body);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.locals.car = newCar;
+      res.locals.specs = newCarSpecs;
+      res.locals.errors = errors.array();
+      return carNewGet(req, res);
+    }
+
     const newId = await carDB.createCar(newCar);
+    await specsDB.createCarSpecs({ car_id: newId, ...newCarSpecs });
 
     res.redirect(`/cars/view/${newId}`);
   },
