@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <%- include("./partials/errors") %>
     <% if (locals.cars) { %>
      <% for(const car of locals.cars) { %>
       <div>
