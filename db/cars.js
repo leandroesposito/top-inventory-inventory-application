@@ -52,7 +52,7 @@ async function createCar(carData) {
 }
 
 async function getAllCars() {
-  const query = `SELECT * FROM cars;`;
+  const query = `SELECT * FROM cars ORDER BY id;`;
 
   return await runGetQuery(query);
 }
