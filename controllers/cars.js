@@ -66,9 +66,10 @@ const carGet = [
 async function carFormGet(req, res) {
   const categories = await categoryDB.getAllCategories();
   const brands = await brandDB.getAllBrands();
+  const title = res.locals.car && res.locals.car.id ? "Edit car" : "New car";
 
   res.status(200).render("cars_form.ejs", {
-    title: "New car",
+    title: title,
     brands,
     categories,
     errors: res.locals.errors,
@@ -81,7 +82,8 @@ const carFormPost = [
   carValidations,
   specsValidations,
   async function carFormPost(req, res) {
-    const newCar = {
+    const car = {
+      id: req.body["id"],
       category_id: req.body["category-id"],
       brand_id: req.body["brand-id"],
       name: req.body["name"],
@@ -97,12 +99,13 @@ const carFormPost = [
       engine_size: req.body["engine-size"],
       seats: req.body["seats"],
       color: req.body["color"],
-      in_stock: req.body["in-stock"],
+      in_stock: req.body["in-stock"] || false,
       stock_quantity: req.body["stock-quantity"],
     };
 
     const bodySpecs = req.body["specs"];
-    const newCarSpecs = {
+    const specs = {
+      id: bodySpecs["id"],
       weight_kg: bodySpecs["weight-kg"],
       length_mm: bodySpecs["length-mm"],
       width_mm: bodySpecs["width-mm"],
@@ -116,16 +119,44 @@ const carFormPost = [
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.locals.car = newCar;
-      res.locals.specs = newCarSpecs;
+      res.locals.car = car;
+      res.locals.specs = specs;
+      res.locals.errors = errors.array();
+      return carFormGet(req, res);
+    }
+    console.log({ body: req.body });
+    console.log({ specs });
+    if (car.id) {
+      await carDB.updateCar(car.id, car);
+      await specsDB.updateCarSpecs(specs.id, specs);
+    } else {
+      car.id = await carDB.createCar(car);
+      await specsDB.createCarSpecs({ car_id: car.id, ...specs });
+    }
+
+    res.redirect(`/cars/view/${car.id}`);
+  },
+];
+
+const carEdit = [
+  param("id").isInt({ min: 0 }).withMessage("parameter must be a number"),
+  param("id").custom(async (value, { req }) => {
+    const car = await carDB.getCarById(value);
+    if (!car) {
+      throw new Error(`Car with id ${value} doesn't exist`);
+    }
+    req.locals = { car };
+  }),
+  async function carEdit(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       res.locals.errors = errors.array();
       return carFormGet(req, res);
     }
 
-    const newId = await carDB.createCar(newCar);
-    await specsDB.createCarSpecs({ car_id: newId, ...newCarSpecs });
-
-    res.redirect(`/cars/view/${newId}`);
+    res.locals.car = req.locals.car;
+    res.locals.specs = await specsDB.getCarSpecsByCarId(res.locals.car.id);
+    carFormGet(req, res);
   },
 ];
 
@@ -134,4 +165,5 @@ module.exports = {
   carGet,
   carFormGet,
   carFormPost,
+  carEdit,
 };
