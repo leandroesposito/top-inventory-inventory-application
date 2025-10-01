@@ -50,14 +50,31 @@
 
   </div>
   <script>
+    const featuresContainer = document.querySelector(".features-container");
+    const addFeatureBtn = document.querySelector(".add-feature-btn");
+    const newFeatureTemplate = (value) => `
+    <input type="text" name="specs[features]" value='${value ?? ''}'>
     <button type="button" class="delete-feature">Delete</button>
+    `;
 
-        const deleteFeatureBtn = newFeature.querySelector(".delete-feature");
-        deleteFeatureBtn.addEventListener("click", () => {
-          featuresContainer.removeChild(newFeature);
-        })
-      })
+    function deleteFeature(featureId){
+      featuresContainer.querySelector(`#${featureId}`).remove();
+    }
 
-    })()
+    function addNewFeature(value){
+      const newFeatureId = `feature-${featuresContainer.childNodes.length}`;
+      const newFeature = document.createElement("div");
+      newFeature.classList.add("feature-row");
+      newFeature.id = newFeatureId;
+      newFeature.innerHTML = newFeatureTemplate(value);
+      featuresContainer.appendChild(newFeature);
+
+      const deleteFeatureBtn = newFeature.querySelector(".delete-feature");
+      deleteFeatureBtn.addEventListener("click", () => {
+        deleteFeature(newFeatureId);
+      });
+    }
+
+    addFeatureBtn.addEventListener("click", () => addNewFeature());
   </script>
 </fieldset>
