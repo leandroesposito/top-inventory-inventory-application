@@ -50,19 +50,7 @@
 
   </div>
   <script>
-    (function(){
-      const featuresContainer = document.querySelector(".features-container");
-      const addFeatureBtn = document.querySelector(".add-feature-btn");
-      const newFeatureTemplate = `
-        <input type="text" name="specs[features]">
-        <button class="delete-feature">Delete</button>
-      `;
-
-      addFeatureBtn.addEventListener("click", () => {
-        const newFeature = document.createElement("div");
-        newFeature.classList.add("feature-row");
-        newFeature.innerHTML = newFeatureTemplate;
-        featuresContainer.appendChild(newFeature);
+    <button type="button" class="delete-feature">Delete</button>
 
         const deleteFeatureBtn = newFeature.querySelector(".delete-feature");
         deleteFeatureBtn.addEventListener("click", () => {
