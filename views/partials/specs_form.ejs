@@ -2,35 +2,35 @@
   <legend>Specs</legend>
   <div class="form-row">
     <label for="weight-kg">Weight Kg</label>
-    <input id="weight-kg" name="specs[weight-kg]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["weight_kg"] : 0) %>" required>
+    <input id="weight-kg" name="specs[weight-kg]" type="number" min="0" value="<%= (locals.specs ? locals.specs["weight_kg"] : 0) %>" required>
   </div>
   <div class="form-row">
     <label for="length-mm">Length mm</label>
-    <input id="length-mm" name="specs[length-mm]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["length_mm"] : 0) %>" required>
+    <input id="length-mm" name="specs[length-mm]" type="number" min="0" value="<%= (locals.specs ? locals.specs["length_mm"] : 0) %>" required>
   </div>
   <div class="form-row">
     <label for="width-mm">Width mm</label>
-    <input id="width-mm" name="specs[width-mm]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["width_mm"] : 0) %>" required>
+    <input id="width-mm" name="specs[width-mm]" type="number" min="0" value="<%= (locals.specs ? locals.specs["width_mm"] : 0) %>" required>
   </div>
   <div class="form-row">
     <label for="height-mm">Height mm</label>
-    <input id="height-mm" name="specs[height-mm]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["height_mm"] : 0) %>" required>
+    <input id="height-mm" name="specs[height-mm]" type="number" min="0" value="<%= (locals.specs ? locals.specs["height_mm"] : 0) %>" required>
   </div>
   <div class="form-row">
     <label for="fuel-capacity-l">Fuel capacity L</label>
-    <input id="fuel-capacity-l" name="specs[fuel-capacity-l]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["fuel_capacity_l"] : 0) %>" required>
+    <input id="fuel-capacity-l" name="specs[fuel-capacity-l]" type="number" min="0" value="<%= (locals.specs ? locals.specs["fuel_capacity_l"] : 0) %>" required>
   </div>
   <div class="form-row">
     <label for="cargo-space-l">Cargo space L</label>
-    <input id="cargo-space-l" name="specs[cargo-space-l]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["cargo_space_l"] : 0) %>" required>
+    <input id="cargo-space-l" name="specs[cargo-space-l]" type="number" min="0" value="<%= (locals.specs ? locals.specs["cargo_space_l"] : 0) %>" required>
   </div>
   <div class="form-row">
     <label for="warranty-years">Warranty Years</label>
-    <input id="warranty-years" name="specs[warranty-years]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["warranty_years"] : 0) %>" required>
+    <input id="warranty-years" name="specs[warranty-years]" type="number" min="0" value="<%= (locals.specs ? locals.specs["warranty_years"] : 0) %>" required>
   </div>
   <div class="form-row">
     <label for="maintenance-interval-km">Maintenance interval Km</label>
-    <input id="maintenance-interval-km" name="specs[maintenance-interval-km]" type="number" min="0" value="<%= (locals.car?.specs ? locals.car.specs["maintenance_interval_km"] : 0) %>" required>
+    <input id="maintenance-interval-km" name="specs[maintenance-interval-km]" type="number" min="0" value="<%= (locals.specs ? locals.specs["maintenance_interval_km"] : 0) %>" required>
   </div>
   <div id="features">
     <h2>Features</h2>
