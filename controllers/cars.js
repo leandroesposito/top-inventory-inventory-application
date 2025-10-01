@@ -63,7 +63,7 @@ const carGet = [
   },
 ];
 
-async function carNewGet(req, res) {
+async function carFormGet(req, res) {
   const categories = await categoryDB.getAllCategories();
   const brands = await brandDB.getAllBrands();
 
@@ -77,10 +77,10 @@ async function carNewGet(req, res) {
   });
 }
 
-const carNewPost = [
+const carFormPost = [
   carValidations,
   specsValidations,
-  async function carNewPost(req, res) {
+  async function carFormPost(req, res) {
     const newCar = {
       category_id: req.body["category-id"],
       brand_id: req.body["brand-id"],
@@ -114,14 +114,12 @@ const carNewPost = [
       features: JSON.stringify(bodySpecs["features"]),
     };
 
-    console.log(req.body);
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.locals.car = newCar;
       res.locals.specs = newCarSpecs;
       res.locals.errors = errors.array();
-      return carNewGet(req, res);
+      return carFormGet(req, res);
     }
 
     const newId = await carDB.createCar(newCar);
@@ -134,6 +132,6 @@ const carNewPost = [
 module.exports = {
   carsGet,
   carGet,
-  carNewGet,
-  carNewPost,
+  carFormGet,
+  carFormPost,
 };
