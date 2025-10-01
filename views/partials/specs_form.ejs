@@ -1,5 +1,8 @@
 <fieldset>
   <legend>Specs</legend>
+  <% if (locals.specs && locals.specs.id) { %>
+    <input type="hidden" name="specs[id]" value="<%= locals.specs.id %>">
+  <% } %>
   <div class="form-row">
     <label for="weight-kg">Weight Kg</label>
     <input id="weight-kg" name="specs[weight-kg]" type="number" min="0" value="<%= (locals.specs ? locals.specs["weight_kg"] : 0) %>" required>
