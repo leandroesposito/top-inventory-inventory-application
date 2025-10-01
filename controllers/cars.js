@@ -45,7 +45,7 @@ async function carsGet(req, res) {
 }
 
 const carGet = [
-  param("id").isInt({ min: 0 }),
+  param("id").isInt({ min: 0 }).withMessage("parameter must be a number"),
   async function carGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
