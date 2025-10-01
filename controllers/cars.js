@@ -51,7 +51,7 @@ const carGet = [
     if (!errors.isEmpty()) {
       return res
         .status(400)
-        .render("car.ejs", { title: "Cars", errors: errors.array() });
+        .render("car.ejs", { title: "Car", errors: errors.array() });
     }
 
     const { id } = req.params;
