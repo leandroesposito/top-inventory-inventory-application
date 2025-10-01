@@ -59,7 +59,6 @@ async function getCarSpecsByCarId(carId) {
 
 async function updateCarSpecs(id, carSpecsData) {
   const {
-    car_id,
     weight_kg,
     length_mm,
     width_mm,
@@ -72,12 +71,11 @@ async function updateCarSpecs(id, carSpecsData) {
   } = carSpecsData;
   const query = `
     UPDATE car_specifications SET
-      car_id = $1, weight_kg = $2, length_mm = $3, width_mm = $4, height_mm = $5,
-      fuel_capacity_l = $6, cargo_space_l = $7, warranty_years = $8,
-      maintenance_interval_km = $9, features = $10
-    WHERE id = $11;`;
+      weight_kg = $1, length_mm = $2, width_mm = $3, height_mm = $4,
+      fuel_capacity_l = $5, cargo_space_l = $6, warranty_years = $7,
+      maintenance_interval_km = $8, features = $9
+    WHERE id = $10;`;
   const params = [
-    car_id,
     weight_kg,
     length_mm,
     width_mm,
