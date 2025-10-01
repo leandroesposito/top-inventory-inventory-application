@@ -35,6 +35,14 @@
   <div id="features">
     <h2>Features</h2>
     <div class="features-container">
+      <% if (locals.specs && locals.specs.features) { %>
+        <% JSON.parse(locals.specs.features).forEach((feature, index) => { %>
+         <div class="feature-row" id="feature-<%= index %>">
+          <input type="text" name="specs[features]" value="<%= feature %>">
+          <button type="button" class="delete-feature" onclick="deleteFeature('feature-<%= index %>')">Delete</button>
+         </div>
+        <% }) %>
+      <% } %>
     </div>
     <button type="button" class="add-feature-btn">Add feature</button>
   </div>
