@@ -46,6 +46,15 @@ async function carsGet(req, res) {
 
 const carGet = [
   param("id").isInt({ min: 0 }).withMessage("parameter must be a number"),
+  param("id").custom(async (value, { req }) => {
+    const {
+      details: { car, specs, brand, category },
+    } = await carDB.getCarDetailsById(value);
+    if (!car) {
+      throw new Error(`Car with id ${value} doesn't exist`);
+    }
+    req.locals = { car, specs, brand, category };
+  }),
   async function carGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -56,10 +65,11 @@ const carGet = [
 
     const { id } = req.params;
 
-    const car = await carDB.getCarById(id);
-    const specs = await specsDB.getCarSpecsByCarId(id);
+    const { car, specs, brand, category } = req.locals;
 
-    res.status(200).render("car.ejs", { title: car.name, car, specs });
+    res
+      .status(200)
+      .render("car.ejs", { title: car.name, car, specs, brand, category });
   },
 ];
 
@@ -141,11 +151,13 @@ const carFormPost = [
 const carEdit = [
   param("id").isInt({ min: 0 }).withMessage("parameter must be a number"),
   param("id").custom(async (value, { req }) => {
-    const car = await carDB.getCarById(value);
+    const {
+      details: { car, specs },
+    } = await carDB.getCarWithSpecsByCarId(value);
     if (!car) {
       throw new Error(`Car with id ${value} doesn't exist`);
     }
-    req.locals = { car };
+    req.locals = { car, specs };
   }),
   async function carEdit(req, res) {
     const errors = validationResult(req);
@@ -155,7 +167,7 @@ const carEdit = [
     }
 
     res.locals.car = req.locals.car;
-    res.locals.specs = await specsDB.getCarSpecsByCarId(res.locals.car.id);
+    res.locals.specs = req.locals.specs;
     carFormGet(req, res);
   },
 ];
