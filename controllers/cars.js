@@ -134,8 +134,7 @@ const carFormPost = [
       res.locals.errors = errors.array();
       return carFormGet(req, res);
     }
-    console.log({ body: req.body });
-    console.log({ specs });
+
     if (car.id) {
       await carDB.updateCar(car.id, car);
       await specsDB.updateCarSpecs(specs.id, specs);
