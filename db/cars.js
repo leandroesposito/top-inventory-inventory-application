@@ -66,7 +66,53 @@ async function getCarById(id) {
   return cars[0];
 }
 
-async function getCarByBrandId(brandId) {
+async function getCarWithSpecsByCarId(id) {
+  const query = `
+    SELECT
+      jsonb_build_object(
+        'car', cars,
+        'specs', specs
+      ) AS details
+    FROM
+      cars
+    LEFT JOIN
+      car_specifications AS specs ON cars.id = specs.car_id
+    WHERE
+      cars.id = $1;
+  `;
+  const params = [id];
+
+  const cars = await runGetQuery(query, params);
+  return cars[0];
+}
+
+async function getCarDetailsById(id) {
+  const query = `
+    SELECT
+      jsonb_build_object(
+        'car', cars,
+        'specs', specs,
+        'category', categories,
+        'brand', brands
+      ) AS details
+    FROM
+      cars
+    LEFT JOIN
+      car_specifications AS specs ON cars.id = specs.car_id
+    JOIN
+      categories ON cars.category_id = categories.id
+    JOIN
+      brands ON cars.brand_id = brands.id
+    WHERE
+      cars.id = $1;
+  `;
+  const params = [id];
+
+  const cars = await runGetQuery(query, params);
+  return cars[0];
+}
+
+async function getCarsByBrandId(brandId) {
   const query = "SELECT * FROM cars WHERE brand_id = $1";
   const params = [brandId];
 
