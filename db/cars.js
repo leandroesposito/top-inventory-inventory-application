@@ -74,6 +74,14 @@ async function getCarByBrandId(brandId) {
   return cars;
 }
 
+async function getCarsByCategoryId(categoryId) {
+  const query = "SELECT * FROM cars WHERE category_id = $1";
+  const params = [categoryId];
+
+  const cars = await runGetQuery(query, params);
+  return cars;
+}
+
 async function updateCar(id, carData) {
   const {
     category_id,
