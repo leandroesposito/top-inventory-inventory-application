@@ -190,7 +190,10 @@ module.exports = {
   createCar,
   getAllCars,
   getCarById,
-  getCarByBrandId,
+  getCarWithSpecsByCarId,
+  getCarDetailsById,
+  getCarsByBrandId,
+  getCarsByCategoryId,
   updateCar,
   deleteCar,
 };
