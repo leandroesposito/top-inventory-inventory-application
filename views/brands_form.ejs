@@ -1,0 +1,32 @@
+<%- include("./partials/upper_body") %>
+  <form action="/brands/new" method="post">
+    <% if (locals.brand && locals.brand.id) { %>
+      <input type="hidden" name="id" value="<%= locals.brand.id %>">
+    <% } %>
+    <div class="form-row">
+      <label for="name">name</label>
+      <input type="text" id="name" name="name" maxlength="100"
+        value="<%= locals.brand ? locals.brand.name : "" %>"
+      />
+    </div>
+    <div class="form-row">
+      <label for="country">country</label>
+      <input type="text" id="country" name="country" maxlength="40"
+        value="<%= locals.brand ? locals.brand.country : "" %>"
+      />
+    </div>
+    <div class="form-row">
+      <label for="founded-year">founded-year</label>
+      <input type="number" id="founded-year" name="founded-year" min="0"
+        value="<%= locals.brand ? locals.brand.founded_year : "" %>"
+      />
+    </div>
+    <div class="form-row">
+      <label for="description">description</label>
+      <input type="text" id="description" name="description"
+        value="<%= locals.brand ? locals.brand.description : "" %>"
+      />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+<%- include("./partials/bottom_body") %>
