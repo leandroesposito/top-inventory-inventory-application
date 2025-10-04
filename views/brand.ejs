@@ -1,0 +1,8 @@
+<%- include("./partials/upper_body.ejs") %>
+  <pre>
+    <%= JSON.stringify(locals.brand, null, 2) %>
+  </pre>
+  <pre>
+    <%= JSON.stringify(locals.cars, null, 2) %>
+  </pre>
+<%- include("./partials/bottom_body.ejs") %>
