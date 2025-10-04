@@ -26,6 +26,15 @@ app.get("/", (req, res) => {
   res.render("index.ejs");
 });
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  console.error(err.stack);
+  res.status(500).render("500.ejs", {
+    title: "Server Error",
+    errors: { msg: err.statusText || `${err.name}: ${err.message}` },
+  });
+});
+
 app.listen(PORT, (error) => {
   if (error) {
     throw error;
