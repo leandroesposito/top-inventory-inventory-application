@@ -1,11 +1,12 @@
 const { runQuery, runGetQuery } = require("./queries");
 
 async function createBrand({ name, country, founded_year, description }) {
-  const query =
-    "INSERT INTO brands (name, country, founded_year, description) VALUES ( $1 , $2 , $3 , $4 );";
+  const query = `INSERT INTO brands (name, country, founded_year, description) VALUES ( $1 , $2 , $3 , $4 )
+                  RETURNING id;`;
   const params = [name, country, founded_year, description];
 
-  await runQuery(query, params);
+  const { rows } = await runQuery(query, params);
+  return rows[0].id;
 }
 
 async function getAllBrands() {
