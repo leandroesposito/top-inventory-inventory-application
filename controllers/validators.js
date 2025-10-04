@@ -21,7 +21,7 @@ function createIntChain(field, max = Number.MAX_SAFE_INTEGER) {
     .withMessage(`${casedField} ${ERRORS.MAX(max)}`);
 }
 
-function createTextChain(field, maxLength) {
+function createTextChain(field, maxLength = Number.MAX_SAFE_INTEGER) {
   const casedField = toCapitalized(field);
   return body(field)
     .trim()
