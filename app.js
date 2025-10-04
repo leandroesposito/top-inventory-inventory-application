@@ -3,6 +3,8 @@ const path = require("node:path");
 const express = require("express");
 const carRouter = require("./routes/car");
 const categoryRouter = require("./routes/category");
+const brandRouter = require("./routes/brand");
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -18,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/cars", carRouter);
 app.use("/categories", categoryRouter);
+app.use("/brands", brandRouter);
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
