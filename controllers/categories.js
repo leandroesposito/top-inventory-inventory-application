@@ -47,7 +47,7 @@ const categoryGet = [
 async function categoryFormGet(req, res) {
   const title = res.locals.category ? "Edit category" : "New Category";
 
-  res.status(200).render("category_form.ejs", {
+  res.status(200).render("categories_form.ejs", {
     title: title,
     category: res.locals.category,
     errors: res.locals.errors,
