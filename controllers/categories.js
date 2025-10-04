@@ -75,7 +75,7 @@ const categoryFormPost = [
       );
     }
 
-    res.redirct(`/category/${category.id}`);
+    res.redirect(`/categories/view/${category.id}`);
   },
 ];
 
