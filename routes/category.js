@@ -4,7 +4,7 @@ const categoryRouter = Router();
 
 categoryRouter.get("/", categoryController.categoriesGet);
 categoryRouter.get("/new", categoryController.categoryFormGet);
-categoryRouter.post("/new", categoryController.categoryPost);
+categoryRouter.post("/new", categoryController.categoryFormPost);
 categoryRouter.get("/edit/:id", categoryController.categoryEdit);
 categoryRouter.get("/:id", categoryController.categoryGet);
 
