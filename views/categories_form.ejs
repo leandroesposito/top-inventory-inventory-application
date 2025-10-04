@@ -1,0 +1,18 @@
+<%- include("./partials/upper_body.ejs") %>
+  <form action="/categories/new" method="post">
+    <% if (locals.category && locals.category.id) { %>
+     <input type="hidden" name="id" value="<%= locals.category.id %>">
+    <% } %>
+    <div class="form-row">
+      <label for="name" >Name</label>
+      <input type="text" name="name" id="name" maxlength="100"
+      value="<%= locals.category ? locals.category.name : "" %>">
+    </div>
+    <div class="form-row">
+      <label for="description" >Description</label>
+      <input type="text" name="description" id="description"
+      value="<%= locals.category ? locals.category.description : "" %>">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+<%- include("./partials/bottom_body.ejs") %>
