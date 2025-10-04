@@ -54,9 +54,9 @@ async function categoryFormGet(req, res) {
   });
 }
 
-const categoryPost = [
+const categoryFormPost = [
   validateCategory,
-  async function categoryPost(req, res) {
+  async function categoryFormPost(req, res) {
     const category = req.body;
 
     const errors = validationResult(req);
@@ -86,18 +86,18 @@ const categoryEdit = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.errors = errors.array();
-      return categoriesGet(req, res);
+    } else {
+      res.locals.category = req.locals.category;
     }
 
-    res.locals.category = req.locals.category;
-    categoriesGet(req, res);
+    categoryFormGet(req, res);
   },
 ];
 
 module.exports = {
   categoriesGet,
   categoryGet,
-  categoryPost,
+  categoryFormPost,
   categoryEdit,
   categoryFormGet,
 };
