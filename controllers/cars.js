@@ -45,7 +45,7 @@ async function carsGet(req, res) {
 }
 
 const carGet = [
-  param("id").isInt({ min: 0 }).withMessage("parameter must be a number"),
+  param("id").isInt({ min: 0 }).withMessage("Id parameter must be a number"),
   param("id").custom(async (value, { req }) => {
     const {
       details: { car, specs, brand, category },
@@ -148,7 +148,7 @@ const carFormPost = [
 ];
 
 const carEdit = [
-  param("id").isInt({ min: 0 }).withMessage("parameter must be a number"),
+  param("id").isInt({ min: 0 }).withMessage("Id parameter must be a number"),
   param("id").custom(async (value, { req }) => {
     const {
       details: { car, specs },
