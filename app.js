@@ -2,6 +2,7 @@ require("dotenv").config();
 const path = require("node:path");
 const express = require("express");
 const carRouter = require("./routes/car");
+const categoryRouter = require("./routes/category");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, assestFolder)));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/cars", carRouter);
+app.use("/categories", categoryRouter);
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
