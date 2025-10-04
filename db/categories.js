@@ -5,7 +5,8 @@ async function createCategory(name, description) {
                   RETURNING id;`;
   const params = [name, description];
 
-  await runQuery(query, params);
+  const { rows } = await runQuery(query, params);
+  return rows[0].id;
 }
 
 async function getAllCategories() {
