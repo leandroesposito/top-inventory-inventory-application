@@ -25,7 +25,7 @@ async function categoriesGet(req, res) {
 
 const categoryGet = [
   param("id").isInt().withMessage("Id parameter must be a number"),
-  categoryExist,
+  categoryExist(),
   async function categoryGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -81,7 +81,7 @@ const categoryPost = [
 
 const categoryEdit = [
   param("id").isInt().withMessage("Id parameter must be a number"),
-  categoryExist,
+  categoryExist(),
   async function categoryEdit(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
