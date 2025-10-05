@@ -7,5 +7,19 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <h1><%= locals.title ?? "Top Inventory Application" %></h1>
-  <%- include("./errors.ejs") %>
+  <header>
+    <div class="left">
+      Supercars Garage
+    </div>
+    <div class="right">
+      <nav>
+        <a href="/cars">Cars</a>
+        <a href="/categories">Categories</a>
+        <a href="/brands">Brands</a>
+      </nav>
+    </div>
+  </header>
+  <div class="root">
+    <main>
+      <h1><%= locals.title ?? "Top Inventory Application" %></h1>
+      <%- include("./errors.ejs") %>
