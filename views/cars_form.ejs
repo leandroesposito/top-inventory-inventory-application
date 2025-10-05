@@ -1,154 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <% if (locals.errors) { %>
-      <% for(const error of errors) { %>
-       <div class="error">
-        <%= error.msg %>
-       </div>
-      <% } %>
+<%- include("./partials/upper_body.ejs") %>
+  <form action="/cars/new" method="POST">
+    <% if (locals.car && locals.car.id) { %>
+      <input type="hidden" name="id" value="<%= locals.car.id %>">
     <% } %>
-    <form action="/cars/new" method="POST">
-      <% if (locals.car && locals.car.id) { %>
-        <input type="hidden" name="id" value="<%= locals.car.id %>">
-      <% } %>
-      <div class="form-row">
-        <label for="category-id">Category</label>
-        <select name="category-id" id="category-id" required>
-          <% for(const category of locals.categories){ %>
-            <option value="<%= category.id %>" <%= locals.car && locals.car.category_id == category.id ? "selected" : null %>>
-              <%= category.name %>
-            </option>
-          <% } %>
-        </select>
-      </div>
-      <div class="form-row">
-        <label for="brand-id">Brand</label>
-        <select name="brand-id" id="brand-id" required>
-          <% for(const brand of locals.brands){ %>
-            <option value="<%= brand.id %>" <%= locals.car && locals.car.brand_id == brand.id ? "selected" : null %>>
-              <%= brand.name %>
-            </option>
-          <% } %>
-        </select>
-      </div>
-      <div class="form-row">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="<%= (locals.car ? locals.car["name"] : "") %>" required />
-      </div>
-      <div class="form-row">
-        <label for="model-year">Model Year</label>
-        <input
-          type="number"
-          name="model-year"
-          id="model-year"
-          min="1900"
-          max="<%= new Date().getFullYear() + 1 %>"
-          step="1"
-          value="<%= (locals.car ? locals.car["model_year"] : 0) %>"
-          required
-        />
-      </div>
-      <div class="form-row">
-        <label for="price">Price</label>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          min="0"
-          max="99999999.99"
-          value="<%= (locals.car ? locals.car["price"] : 0) %>"
-          required
-        />
-      </div>
-      <div class="form-row">
-        <label for="horsepower">Horsepower</label>
-        <input type="number" name="horsepower" id="horsepower" min="0"
-          value="<%= (locals.car ? locals.car["horsepower"] : 0) %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="torque">Torque</label>
-        <input type="number" name="torque" id="torque" min="0"
-          value="<%= (locals.car ? locals.car["torque"] : 0) %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="top-speed">Top Speed</label>
-        <input type="number" name="top-speed" id="top-speed" min="0"
-          value="<%= (locals.car ? locals.car["top_speed"] : 0) %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="acceleration-0-60">Acceleration 0-60</label>
-        <input
-          type="number"
-          name="acceleration-0-60"
-          id="acceleration-0-60"
-          min="0"
-          max="99"
-          step="0.01"
-          value="<%= (locals.car ? locals.car["acceleration_0_60"] : 0) %>"
-          required
-        />
-      </div>
-      <div class="form-row">
-        <label for="transmission">Transmission</label>
-        <input type="text" maxlength="50" name="transmission" id="transmission"
-          value="<%= (locals.car ? locals.car["transmission"] : "") %>"
-          required
-        />
-      </div>
-      <div class="form-row">
-        <label for="drivetrain">Drivetrain</label>
-        <input type="text" maxlength="50" name="drivetrain" id="drivetrain"
-          value="<%= (locals.car ? locals.car["drivetrain"] : "") %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="fuel-type">Fuel Type</label>
-        <input type="text" maxlength="50" name="fuel-type" id="fuel-type"
-          value="<%= (locals.car ? locals.car["fuel_type"] : "") %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="engine-size">Engine Size</label>
-        <input type="text" maxlength="50" name="engine-size" id="engine-size"
-          value="<%= (locals.car ? locals.car["engine_size"] : "") %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="seats">Seats</label>
-        <input type="number" name="seats" id="seats" min="0" max="10"
-          value="<%= (locals.car ? locals.car["seats"] : 0) %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="color">Color</label>
-        <input type="text" maxlength="50" name="color" id="color"
-          value="<%= (locals.car ? locals.car["color"] : "") %>" required
-        />
-      </div>
-      <div class="form-row">
-        <label for="in-stock">In Stock</label>
-        <input type="checkbox" name="in-stock" id="in-stock"
-          <%= (locals.car && locals.car["in_stock"] ? "checked" : null) %>
-        />
-      </div>
-      <div class="form-row">
-        <label for="stock-quantity">Stock Quantity</label>
-        <input type="number" name="stock-quantity" id="stock-quantity" min="0"
-          value="<%= (locals.car ? locals.car["stock_quantity"] : 0) %>"
-        />
-      </div>
-      <%- include("./partials/specs_form.ejs") %>
-      <button type="submit">Submit</button>
-    </form>
-  </body>
-</html>
+    <div class="form-row">
+      <label for="category-id">Category</label>
+      <select name="category-id" id="category-id" required>
+        <% for(const category of locals.categories){ %>
+          <option value="<%= category.id %>" <%= locals.car && locals.car.category_id == category.id ? "selected" : null %>>
+            <%= category.name %>
+          </option>
+        <% } %>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="brand-id">Brand</label>
+      <select name="brand-id" id="brand-id" required>
+        <% for(const brand of locals.brands){ %>
+          <option value="<%= brand.id %>" <%= locals.car && locals.car.brand_id == brand.id ? "selected" : null %>>
+            <%= brand.name %>
+          </option>
+        <% } %>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="<%= (locals.car ? locals.car["name"] : "") %>" required />
+    </div>
+    <div class="form-row">
+      <label for="model-year">Model Year</label>
+      <input
+        type="number"
+        name="model-year"
+        id="model-year"
+        min="1900"
+        max="<%= new Date().getFullYear() + 1 %>"
+        step="1"
+        value="<%= (locals.car ? locals.car["model_year"] : 0) %>"
+        required
+      />
+    </div>
+    <div class="form-row">
+      <label for="price">Price</label>
+      <input
+        type="number"
+        name="price"
+        id="price"
+        min="0"
+        max="99999999.99"
+        value="<%= (locals.car ? locals.car["price"] : 0) %>"
+        required
+      />
+    </div>
+    <div class="form-row">
+      <label for="horsepower">Horsepower</label>
+      <input type="number" name="horsepower" id="horsepower" min="0"
+        value="<%= (locals.car ? locals.car["horsepower"] : 0) %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="torque">Torque</label>
+      <input type="number" name="torque" id="torque" min="0"
+        value="<%= (locals.car ? locals.car["torque"] : 0) %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="top-speed">Top Speed</label>
+      <input type="number" name="top-speed" id="top-speed" min="0"
+        value="<%= (locals.car ? locals.car["top_speed"] : 0) %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="acceleration-0-60">Acceleration 0-60</label>
+      <input
+        type="number"
+        name="acceleration-0-60"
+        id="acceleration-0-60"
+        min="0"
+        max="99"
+        step="0.01"
+        value="<%= (locals.car ? locals.car["acceleration_0_60"] : 0) %>"
+        required
+      />
+    </div>
+    <div class="form-row">
+      <label for="transmission">Transmission</label>
+      <input type="text" maxlength="50" name="transmission" id="transmission"
+        value="<%= (locals.car ? locals.car["transmission"] : "") %>"
+        required
+      />
+    </div>
+    <div class="form-row">
+      <label for="drivetrain">Drivetrain</label>
+      <input type="text" maxlength="50" name="drivetrain" id="drivetrain"
+        value="<%= (locals.car ? locals.car["drivetrain"] : "") %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="fuel-type">Fuel Type</label>
+      <input type="text" maxlength="50" name="fuel-type" id="fuel-type"
+        value="<%= (locals.car ? locals.car["fuel_type"] : "") %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="engine-size">Engine Size</label>
+      <input type="text" maxlength="50" name="engine-size" id="engine-size"
+        value="<%= (locals.car ? locals.car["engine_size"] : "") %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="seats">Seats</label>
+      <input type="number" name="seats" id="seats" min="0" max="10"
+        value="<%= (locals.car ? locals.car["seats"] : 0) %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="color">Color</label>
+      <input type="text" maxlength="50" name="color" id="color"
+        value="<%= (locals.car ? locals.car["color"] : "") %>" required
+      />
+    </div>
+    <div class="form-row">
+      <label for="in-stock">In Stock</label>
+      <input type="checkbox" name="in-stock" id="in-stock"
+        <%= (locals.car && locals.car["in_stock"] ? "checked" : null) %>
+      />
+    </div>
+    <div class="form-row">
+      <label for="stock-quantity">Stock Quantity</label>
+      <input type="number" name="stock-quantity" id="stock-quantity" min="0"
+        value="<%= (locals.car ? locals.car["stock_quantity"] : 0) %>"
+      />
+    </div>
+    <%- include("./partials/specs_form.ejs") %>
+    <button type="submit">Submit</button>
+  </form>
+<%- include("./partials/bottom_body.ejs") %>
