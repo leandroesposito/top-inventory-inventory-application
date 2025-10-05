@@ -6,7 +6,5 @@
   <title><%= locals.title ?? "Top Inventory Application" %></title>
 </head>
 <body>
-  <% if (locals.title) { %>
-   <h1> <%= locals.title %> </h1>
-  <% } %>
+  <h1><%= locals.title ?? "Top Inventory Application" %></h1>
   <%- include("./errors.ejs") %>
