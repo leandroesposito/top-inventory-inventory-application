@@ -247,3 +247,37 @@ fieldset {
 button[type="submit"] {
   align-self: center;
 }
+
+/*
+  item
+*/
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item h2 {
+  margin: 1rem 0;
+}
+
+.features {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.feature {
+  padding: 0.5rem 1rem;
+  color: var(--font-black-light);
+  border: 1px solid var(--font-black-dark);
+  border-radius: 0.5rem;
+}
