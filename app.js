@@ -23,7 +23,7 @@ app.use("/categories", categoryRouter);
 app.use("/brands", brandRouter);
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs", { title: "Supercars Garage" });
 });
 
 app.use((err, req, res, next) => {
