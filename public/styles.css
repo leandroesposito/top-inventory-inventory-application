@@ -4,6 +4,10 @@
   --font-black-light: #595959;
 }
 
+/*
+  General sets
+*/
+
 body {
   font-size: 16px;
   padding: 0;
@@ -31,6 +35,10 @@ button,
 .button {
   cursor: pointer;
 }
+
+/*
+  site layout
+*/
 
 body {
   display: flex;
@@ -95,6 +103,10 @@ main {
   flex-direction: column;
   gap: 2rem;
 }
+
+/*
+  items cards
+*/
 
 .item-card {
   padding: 1rem 1rem;
