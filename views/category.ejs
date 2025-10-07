@@ -1,4 +1,8 @@
-<%- include("./partials/upper_body.ejs") %>
+<%- include("./partials/upper_body.ejs", { buttons: [
+    { href: `/categories/edit/${locals.category.id}`, caption: "Edit" },
+    { href: `/categories/delete/${locals.category.id}`, caption: "Delete" },
+  ] })
+%>
   <pre>
     Category
     <%= JSON.stringify(locals.category, null, 2) %>

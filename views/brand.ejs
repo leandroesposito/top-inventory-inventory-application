@@ -1,4 +1,8 @@
-<%- include("./partials/upper_body.ejs") %>
+<%- include("./partials/upper_body.ejs", { buttons: [
+    { href: `/brands/edit/${locals.brand.id}`, caption: "Edit" },
+    { href: `/brands/delete/${locals.brand.id}`, caption: "Delete" },
+  ] })
+%>
   <pre>
     <%= JSON.stringify(locals.brand, null, 2) %>
   </pre>
