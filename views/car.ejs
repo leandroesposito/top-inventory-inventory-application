@@ -1,14 +1,215 @@
-<%- include("./partials/upper_body.ejs") %>
-  <pre>
-    car: <%= JSON.stringify(locals.car, null, 2) %>
-  </pre>
-  <pre>
-    specs: <%= JSON.stringify(locals.specs, null, 2) %>
-  </pre>
-  <pre>
-    brand: <%= JSON.stringify(locals.brand, null, 2) %>
-  </pre>
-  <pre>
-    category: <%= JSON.stringify(locals.category, null, 2) %>
-  </pre>
+<%- include("./partials/upper_body.ejs", { buttons: [
+    { href: `/cars/edit/${locals.car.id}`, caption: "Edit" },
+    { href: `/cars/delete/${locals.car.id}`, caption: "Delete" },
+  ] })
+%>
+  <div class="item">
+    <div class="buttons">
+      <a href="/categories/view/<%= locals.category.id %>" class="button">
+        <%= locals.category.name %>
+      </a>
+      <a href="/brands/view/<%= locals.brand.id %>" class="button">
+        <%= locals.brand.name %>
+      </a>
+    </div>
+    <div class="item-body">
+      <div class="field">
+        <span class="field-name">
+          Name
+        </span>
+        <span class="field-value">
+          <%= locals.car.name %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Color
+        </span>
+        <span class="field-value">
+          <%= locals.car.color %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Price
+        </span>
+        <span class="field-value">
+          $<%= locals.car.price %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Seats
+        </span>
+        <span class="field-value">
+          <%= locals.car.seats %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Torque
+        </span>
+        <span class="field-value">
+          <%= locals.car.torque %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Fuel type
+        </span>
+        <span class="field-value">
+          <%= locals.car.fuel_type %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Top speed
+        </span>
+        <span class="field-value">
+          <%= locals.car.top_speed %> Km/h
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Drivetrain
+        </span>
+        <span class="field-value">
+          <%= locals.car.drivetrain %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Horsepower
+        </span>
+        <span class="field-value">
+          <%= locals.car.horsepower %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Model year
+        </span>
+        <span class="field-value">
+          <%= locals.car.model_year %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Engine size
+        </span>
+        <span class="field-value">
+          <%= locals.car.engine_size %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Transmission
+        </span>
+        <span class="field-value">
+          <%= locals.car.transmission %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          In Stock
+        </span>
+        <span class="field-value">
+          <%= locals.car.in_stock ? "Yes" : "No" %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Stock quantity
+        </span>
+        <span class="field-value">
+          <%= locals.car.stock_quantity %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Acceleration 0-60
+        </span>
+        <span class="field-value">
+          <%= locals.car.acceleration_0_60 %>s
+        </span>
+      </div>
+      <% if (locals.specs) { %>
+        <div class="field">
+          <span class="field-name">
+            Width
+          </span>
+          <span class="field-value">
+            <%= locals.specs.width_mm %> mm
+          </span>
+        </div>
+        <div class="field">
+          <span class="field-name">
+            Height
+          </span>
+          <span class="field-value">
+            <%= locals.specs.height_mm %> mm
+          </span>
+        </div>
+        <div class="field">
+          <span class="field-name">
+            Length
+          </span>
+          <span class="field-value">
+            <%= locals.specs.length_mm %> mm
+          </span>
+        </div>
+        <div class="field">
+          <span class="field-name">
+            Weight:
+          </span>
+          <span class="field-value">
+            <%= locals.specs.weight_kg %> Kg
+          </span>
+        </div>
+        <div class="field">
+          <span class="field-name">
+            Cargo space
+          </span>
+          <span class="field-value">
+            <%= locals.specs.cargo_space_l %>L
+          </span>
+        </div>
+        <div class="field">
+          <span class="field-name">
+            Warranty
+          </span>
+          <span class="field-value">
+            <%= locals.specs.warranty_years %> years
+          </span>
+        </div>
+        <div class="field">
+          <span class="field-name">
+            Fuel capacity
+          </span>
+          <span class="field-value">
+            <%= locals.specs.fuel_capacity_l %> L
+          </span>
+        </div>
+        <div class="field">
+          <span class="field-name">
+            Maintenance interval
+          </span>
+          <span class="field-value">
+            <%= locals.specs.maintenance_interval_km %> Km
+          </span>
+        </div>
+        <% if (locals.specs.features) { %>
+          <h2>Features</h2>
+          <div class="features">
+          <% locals.specs.features.forEach(feature => { %>
+            <span class="feature">
+              <%= feature %>
+            </span>
+          <% }) %>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+    </div>
+  </div>
 <%- include("./partials/bottom_body.ejs") %>
