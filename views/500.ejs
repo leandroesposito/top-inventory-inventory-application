@@ -10,7 +10,9 @@
   <p>Server Error</p>
   <% if (locals.error) { %>
    <div class="error">
-    <%= locals.error.msg %>
+    <pre>
+      <%= locals.error.msg %>
+    </pre>
    </div>
   <% } %>
 </body>
