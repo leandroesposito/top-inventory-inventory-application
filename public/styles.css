@@ -97,6 +97,12 @@ main {
   gap: 2rem;
 }
 
+main > .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
