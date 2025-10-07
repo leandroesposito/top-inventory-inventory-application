@@ -1,0 +1,25 @@
+<article class="item-card">
+  <div class="item-header">
+    <div class="item-name">
+      <a href="/categories/view/<%= locals.category.id %>">
+        <h2>
+          <%= locals.category.name %>
+        </h2>
+      </a>
+    </div>
+    <div class="item-buttons">
+      <a href="/categories/view/<%= locals.category.id %>" class="view button">
+        View
+      </a>
+      <a href="/categories/edit/<%= locals.category.id %>" class="edit button">
+        Edit
+      </a>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="item-field">
+      <span class="field-name">Description</span>
+      <span class="field-value"><%= locals.category.description %></span>
+    </div>
+  </div>
+</article>
