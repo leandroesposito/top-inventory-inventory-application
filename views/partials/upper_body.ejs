@@ -26,6 +26,13 @@
     <main>
       <div class="title">
         <h1><%= locals.title ?? "Top Inventory Application" %></h1>
+        <% if (locals.createButton) { %>
+          <div class="buttons">
+            <a href="<%= locals.createButton.href %>" class="button">
+              <%= locals.createButton.caption %>
+            </a>
+          </div>
+        <% } %>
       </div>
       <%- include("./errors.ejs") %>
       <div class="content">
