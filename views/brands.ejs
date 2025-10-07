@@ -1,5 +1,7 @@
 <%- include("./partials/upper_body.ejs") %>
-  <pre>
-    <%= JSON.stringify(locals.brands, null, 2) %>
-  </pre>
+  <% if (locals.brands) { %>
+    <% for( const brand of brands ) { %>
+      <%- include("./partials/brand_card.ejs", { brand }) %>
+    <% } %>
+  <% } %>
 <%- include("./partials/bottom_body.ejs") %>
