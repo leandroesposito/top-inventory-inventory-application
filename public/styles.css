@@ -164,6 +164,8 @@ button.view-more {
   margin: 0.5rem 0;
   border: none;
   background-color: white;
+  border: 1px solid black;
+  font-weight: bold;
 }
 button.view-more:hover {
   text-decoration: underline;
