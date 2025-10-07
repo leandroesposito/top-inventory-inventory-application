@@ -1,0 +1,120 @@
+<article class="item-card" id="card-<%= locals.car.id %>">
+  <div class="item-header">
+    <div class="item-name">
+      <a href="/cars/view/<%= locals.car.id %>">
+        <h2>
+          <%= locals.car.name %>
+        </h2>
+      </a>
+    </div>
+    <div class="item-buttons">
+      <a href="/cars/view/<%= locals.car.id %>" class="view button">
+        View
+      </a>
+      <a href="/cars/edit/<%= locals.car.id %>" class="edit button">
+        Edit
+      </a>
+    </div>
+  </div>
+  <div class="item-body">
+    <div class="item-field">
+      <span class="field-name">
+        Model year
+      </span>
+      <span class="field-value">
+        <%= locals.car.model_year %>
+      </span>
+    </div>
+    <div class="item-field">
+      <span class="field-name">
+        Price
+      </span>
+      <span class="field-value">
+        <%= locals.car.price %>
+      </span>
+    </div>
+    <div class="item-field">
+      <span class="field-name">
+        Color
+      </span>
+      <span class="field-value">
+        <%= locals.car.color %>
+      </span>
+    </div>
+    <div class="item-field">
+      <span class="field-name">
+        Transmission
+      </span>
+      <span class="field-value">
+        <%= locals.car.transmission %>
+      </span>
+    </div>
+    <div class="item-field">
+      <span class="field-name">
+        Seats
+      </span>
+      <span class="field-value">
+        <%= locals.car.seats %>
+      </span>
+    </div>
+    <div class="details">
+      <div class="item-field">
+        <span class="field-name">
+          Horsepower
+        </span>
+        <span class="field-value">
+          <%= locals.car.horsepower %>
+        </span>
+      </div>
+      <div class="item-field">
+        <span class="field-name">
+          Torque
+        </span>
+        <span class="field-value">
+          <%= locals.car.torque %>
+        </span>
+      </div>
+      <div class="item-field">
+        <span class="field-name">
+          Top Speed
+        </span>
+        <span class="field-value">
+          <%= locals.car.top_speed %> Km/h
+        </span>
+      </div>
+      <div class="item-field">
+        <span class="field-name">
+          Acceleration 0-60
+        </span>
+        <span class="field-value">
+          <%= locals.car.acceleration_0_60 %>
+        </span>
+      </div>
+      <div class="item-field">
+        <span class="field-name">
+          Drivetrain
+        </span>
+        <span class="field-value">
+          <%= locals.car.drivetrain %>
+        </span>
+      </div>
+      <div class="item-field">
+        <span class="field-name">
+          Fuel type
+        </span>
+        <span class="field-value">
+          <%= locals.car.fuel_type %>
+        </span>
+      </div>
+      <div class="item-field">
+        <span class="field-name">
+          Engine size
+        </span>
+        <span class="field-value">
+          <%= locals.car.engine_size %>
+        </span>
+      </div>
+    </div>
+    <button class="view-more" onclick="expand('card-<%= locals.car.id %>')">View more</button>
+  </div>
+</article>
