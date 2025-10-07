@@ -63,8 +63,6 @@ const carGet = [
         .render("car.ejs", { title: "Car", errors: errors.array() });
     }
 
-    const { id } = req.params;
-
     const { car, specs, brand, category } = req.locals;
 
     res
