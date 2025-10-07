@@ -1,4 +1,4 @@
-<%- include("./partials/upper_body.ejs", { createButton: { href: "/brands/new", caption: "+ New brand" } }) %>
+<%- include("./partials/upper_body.ejs", { buttons: [{ href: "/brands/new", caption: "+ New brand" }] }) %>
   <% if (locals.brands) { %>
     <% for( const brand of brands ) { %>
       <%- include("./partials/brand_card.ejs", { brand }) %>

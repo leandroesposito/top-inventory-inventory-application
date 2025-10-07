@@ -1,4 +1,4 @@
-<%- include("./partials/upper_body.ejs", { createButton: { href: "/cars/new", caption: "+ New car" } }) %>
+<%- include("./partials/upper_body.ejs", { buttons: [{ href: "/cars/new", caption: "+ New car" }] }) %>
   <% if (locals.cars) { %>
     <% for(const car of locals.cars) { %>
       <%- include("./partials/car_card.ejs", { car }) %>

@@ -26,11 +26,13 @@
     <main>
       <div class="title">
         <h1><%= locals.title ?? "Top Inventory Application" %></h1>
-        <% if (locals.createButton) { %>
+        <% if (locals.buttons) { %>
           <div class="buttons">
-            <a href="<%= locals.createButton.href %>" class="button">
-              <%= locals.createButton.caption %>
-            </a>
+            <% locals.buttons.forEach(button => { %>
+              <a href="<%= button.href %>" class="button">
+                <%= button.caption %>
+              </a>
+            <% }) %>
           </div>
         <% } %>
       </div>
