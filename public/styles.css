@@ -101,6 +101,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgb(190, 190, 190);
 }
 
 .item-header {
