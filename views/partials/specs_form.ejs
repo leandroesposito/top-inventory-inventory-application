@@ -47,12 +47,12 @@
         features.forEach((feature, index) => { %>
          <div class="feature-row" id="feature-<%= index %>">
           <input type="text" name="specs[features]" value="<%= feature %>">
-          <button type="button" class="delete-feature" onclick="deleteFeature('feature-<%= index %>')">Delete</button>
+          <button type="button" class="delete-feature button" onclick="deleteFeature('feature-<%= index %>')">Delete</button>
          </div>
         <% }) %>
       <% } %>
     </div>
-    <button type="button" class="add-feature-btn">Add feature</button>
+    <button type="button" class="add-feature-btn button">Add feature</button>
   </div>
   <div class="">
 
@@ -62,7 +62,7 @@
     const addFeatureBtn = document.querySelector(".add-feature-btn");
     const newFeatureTemplate = (value) => `
     <input type="text" name="specs[features]" value='${value ?? ''}'>
-    <button type="button" class="delete-feature">Delete</button>
+    <button type="button" class="delete-feature button">Delete</button>
     `;
 
     function deleteFeature(featureId){
