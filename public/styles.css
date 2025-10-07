@@ -110,10 +110,10 @@ main > .title {
 }
 
 /*
-  items cards
+  cards
 */
 
-.item-card {
+.card {
   padding: 1rem 1rem;
   display: flex;
   flex-direction: column;
@@ -122,18 +122,18 @@ main > .title {
   box-shadow: 0 0 10px rgb(190, 190, 190);
 }
 
-.item-header {
+.card-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
 }
 
-.item-name a {
+.card-name a {
   color: var(--font-black-dark);
 }
 
-.item-buttons {
+.card-buttons {
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -166,13 +166,13 @@ main > .title {
   color: var(--font-black-light);
 }
 
-.item-body .details {
+.card-body .details {
   max-height: 0;
   transition: max-height 0.5s;
   overflow: hidden;
 }
 
-.item-body .details.expanded {
+.card-body .details.expanded {
   max-height: 150px;
 }
 
