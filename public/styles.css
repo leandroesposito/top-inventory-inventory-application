@@ -134,7 +134,7 @@ main {
   gap: 1rem;
 }
 
-.item-header a.button {
+.button {
   text-decoration: none;
   color: var(--font-black-dark);
   background-color: white;
@@ -144,7 +144,7 @@ main {
   font-weight: bold;
 }
 
-.item-header a.button:hover {
+.button:hover {
   text-decoration: underline;
 }
 
