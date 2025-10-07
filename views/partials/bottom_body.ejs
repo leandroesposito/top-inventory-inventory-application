@@ -1,5 +1,23 @@
       </div>
     </main>
   </div>
+  <script>
+    function expand(id){
+      const card = document.querySelector(`#${id}`);
+      const details = card.querySelector(`.details`);
+      const viewMoreButton = card.querySelector(".view-more");
+      details.classList.toggle("expanded");
+      viewMoreButton.classList.toggle("expanded");
+
+      const expanded = details.classList.contains("expanded");
+      if (expanded){
+        viewMoreButton.textContent = `View less`;
+      }
+      else
+      {
+        viewMoreButton.textContent = "View more";
+      }
+    }
+  </script>
 </body>
 </html>
