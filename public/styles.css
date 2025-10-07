@@ -170,21 +170,3 @@ button.view-more {
 button.view-more:hover {
   text-decoration: underline;
 }
-
-button.view-more:not(.expanded)::after {
-  position: absolute;
-  content: "v";
-  bottom: -50%;
-  text-align: center;
-  width: 100%;
-  left: 0;
-}
-
-button.view-more.expanded::before {
-  position: absolute;
-  content: "^";
-  top: -50%;
-  text-align: center;
-  width: 100%;
-  left: 0;
-}
