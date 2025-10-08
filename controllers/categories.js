@@ -24,13 +24,11 @@ const categoryExist = () =>
 async function categoriesGet(req, res) {
   const categories = await categoriesDB.getAllCategories();
 
-  res
-    .status(200)
-    .render("categories.ejs", {
-      title: "Categories",
-      categories,
-      errors: res.locals.errors,
-    });
+  res.status(200).render("categories.ejs", {
+    title: "Categories",
+    categories,
+    errors: res.locals.errors,
+  });
 }
 
 const categoryGet = [
