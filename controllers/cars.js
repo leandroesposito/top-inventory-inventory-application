@@ -47,12 +47,14 @@ async function carsGet(req, res) {
 const carGet = [
   param("id").isInt({ min: 0 }).withMessage("Id parameter must be a number"),
   param("id").custom(async (value, { req }) => {
-    const {
-      details: { car, specs, brand, category },
-    } = await carDB.getCarDetailsById(value);
-    if (!car) {
+    const details = await carDB.getCarDetailsById(value);
+    if (!details) {
       throw new Error(`Car with id ${value} doesn't exist`);
     }
+
+    const {
+      details: { car, specs, brand, category },
+    } = details;
     req.locals = { car, specs, brand, category };
   }),
   async function carGet(req, res) {
