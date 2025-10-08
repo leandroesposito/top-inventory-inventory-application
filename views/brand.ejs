@@ -3,10 +3,39 @@
     { href: `/brands/delete/${locals.brand.id}`, caption: "Delete" },
   ] })
 %>
-  <pre>
-    <%= JSON.stringify(locals.brand, null, 2) %>
-  </pre>
-  <pre>
-    <%= JSON.stringify(locals.cars, null, 2) %>
-  </pre>
+  <div class="item">
+    <div class="item-body">
+      <div class="field">
+        <span class="field-name">
+          Country
+        </span>
+        <span class="field-value">
+          <%= locals.brand.country %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Founded year
+        </span>
+        <span class="field-value">
+          <%= locals.brand.founded_year %>
+        </span>
+      </div>
+      <div class="field">
+        <span class="field-name">
+          Description
+        </span>
+        <span class="field-value">
+          <%= locals.brand.description %>
+        </span>
+      </div>
+      <div class="cards">
+        <% if (locals.cars) { %>
+          <% locals.cars.forEach(car => { %>
+            <%- include("./partials/car_card.ejs", { car }) %>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+  </div>
 <%- include("./partials/bottom_body.ejs") %>
