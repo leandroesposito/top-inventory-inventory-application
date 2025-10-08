@@ -4,16 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Server Error</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>500</h1>
-  <p>Server Error</p>
-  <% if (locals.error) { %>
-   <div class="error">
-    <pre>
-      <%= locals.error.msg %>
-    </pre>
-   </div>
-  <% } %>
+  <div class="body">
+    <main class="server-error">
+      <h1>500</h1>
+      <h2>Server Error</h2>
+    </main>
+  </div>
 </body>
 </html>

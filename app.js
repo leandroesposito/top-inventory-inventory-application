@@ -31,7 +31,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).render("500.ejs", {
     title: "Server Error",
-    error: { msg: err.statusText || `${err.name}: ${err.message}` },
   });
 });
 
