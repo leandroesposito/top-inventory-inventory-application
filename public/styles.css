@@ -282,3 +282,16 @@ button[type="submit"] {
   border: 1px solid var(--font-black-dark);
   border-radius: 0.5rem;
 }
+
+/*
+  errors
+*/
+
+.errors {
+  border: 3px solid rgb(117, 0, 0);
+  padding: 1rem;
+  border-radius: 1rem;
+  color: rgb(117, 0, 0);
+  background-color: rgb(255, 181, 181);
+  font-weight: bold;
+}
