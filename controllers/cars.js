@@ -38,6 +38,21 @@ const specsValidations = [
   createIntChain("specs['maintenance-interval-km']"),
 ];
 
+const carExist = () =>
+  param("id").custom(async (value, { req }) => {
+    if (!Number.isInteger(value)) {
+      return;
+    }
+
+    const {
+      details: { car, specs },
+    } = await carDB.getCarWithSpecsByCarId(value);
+    if (!car) {
+      throw new Error(`Car with id ${value} doesn't exist`);
+    }
+    req.locals = { car, specs };
+  });
+
 async function carsGet(req, res) {
   const cars = await carDB.getAllCars();
 
@@ -47,18 +62,11 @@ async function carsGet(req, res) {
 }
 
 const carGet = [
-  param("id").isInt({ min: 0 }).withMessage("Id parameter must be a number"),
-  param("id").custom(async (value, { req }) => {
-    const details = await carDB.getCarDetailsById(value);
-    if (!details) {
-      throw new Error(`Car with id ${value} doesn't exist`);
-    }
-
-    const {
-      details: { car, specs, brand, category },
-    } = details;
-    req.locals = { car, specs, brand, category };
-  }),
+  param("id")
+    .isInt({ min: 0 })
+    .withMessage("Id parameter must be a number")
+    .toInt(),
+  carExist(),
   async function carGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -149,16 +157,11 @@ const carFormPost = [
 ];
 
 const carEdit = [
-  param("id").isInt({ min: 0 }).withMessage("Id parameter must be a number"),
-  param("id").custom(async (value, { req }) => {
-    const {
-      details: { car, specs },
-    } = await carDB.getCarWithSpecsByCarId(value);
-    if (!car) {
-      throw new Error(`Car with id ${value} doesn't exist`);
-    }
-    req.locals = { car, specs };
-  }),
+  param("id")
+    .isInt({ min: 0 })
+    .withMessage("Id parameter must be a number")
+    .toInt(),
+  carExist(),
   async function carEdit(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

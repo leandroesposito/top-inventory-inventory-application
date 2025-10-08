@@ -12,6 +12,10 @@ const validateBrand = [
 
 const brandExist = () =>
   param("id").custom(async (value, { req }) => {
+    if (!Number.isInteger(value)) {
+      return;
+    }
+
     const brand = await brandsDB.getBrandById(value);
     if (!brand) {
       throw new Error(`Brand with id ${value} doesn't exist`);
@@ -30,7 +34,10 @@ async function brandsGet(req, res) {
 }
 
 const brandGet = [
-  param("id").isInt().withMessage("Id parameter must be a number"),
+  param("id")
+    .isInt({ min: 0 })
+    .withMessage("Id parameter must be a number")
+    .toInt(),
   brandExist(),
   async function brandGet(req, res) {
     const errors = validationResult(req);
@@ -86,7 +93,10 @@ const brandFormPost = [
 ];
 
 const brandEdit = [
-  param("id").isInt().withMessage("Id parameter must be a number"),
+  param("id")
+    .isInt({ min: 0 })
+    .withMessage("Id parameter must be a number")
+    .toInt(),
   brandExist(),
   async function brandEdit(req, res) {
     const errors = validationResult(req);

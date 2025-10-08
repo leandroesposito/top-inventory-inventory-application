@@ -10,6 +10,10 @@ const validateCategory = [
 
 const categoryExist = () =>
   param("id").custom(async (value, { req }) => {
+    if (!Number.isInteger(value)) {
+      return;
+    }
+
     const category = await categoriesDB.getCategoryById(value);
     if (!category) {
       throw new Error(`Category with id ${value} doesn't exist`);
@@ -30,7 +34,10 @@ async function categoriesGet(req, res) {
 }
 
 const categoryGet = [
-  param("id").isInt().withMessage("Id parameter must be a number"),
+  param("id")
+    .isInt({ min: 0 })
+    .withMessage("Id parameter must be a number")
+    .toInt(),
   categoryExist(),
   async function categoryGet(req, res) {
     const errors = validationResult(req);
@@ -84,7 +91,10 @@ const categoryFormPost = [
 ];
 
 const categoryEdit = [
-  param("id").isInt().withMessage("Id parameter must be a number"),
+  param("id")
+    .isInt({ min: 0 })
+    .withMessage("Id parameter must be a number")
+    .toInt(),
   categoryExist(),
   async function categoryEdit(req, res) {
     const errors = validationResult(req);
