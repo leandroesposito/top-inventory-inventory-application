@@ -1,7 +1,9 @@
 <%- include("./partials/upper_body.ejs", { buttons: [{ href: "/brands/new", caption: "+ New brand" }] }) %>
-  <% if (locals.brands) { %>
-    <% for( const brand of brands ) { %>
-      <%- include("./partials/brand_card.ejs", { brand }) %>
+  <div class="cards">
+    <% if (locals.brands) { %>
+      <% for( const brand of brands ) { %>
+        <%- include("./partials/brand_card.ejs", { brand }) %>
+      <% } %>
     <% } %>
-  <% } %>
+  </div>
 <%- include("./partials/bottom_body.ejs") %>

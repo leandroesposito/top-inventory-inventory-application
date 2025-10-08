@@ -1,7 +1,9 @@
 <%- include("./partials/upper_body.ejs", { buttons: [{ href: "/cars/new", caption: "+ New car" }] }) %>
-  <% if (locals.cars) { %>
-    <% for(const car of locals.cars) { %>
-      <%- include("./partials/car_card.ejs", { car }) %>
+  <div class="cards">
+    <% if (locals.cars) { %>
+      <% for(const car of locals.cars) { %>
+        <%- include("./partials/car_card.ejs", { car }) %>
+      <% } %>
     <% } %>
-  <% } %>
+  </div>
 <%- include("./partials/bottom_body.ejs") %>
