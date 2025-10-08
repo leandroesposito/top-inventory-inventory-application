@@ -295,3 +295,16 @@ button[type="submit"] {
   background-color: rgb(255, 181, 181);
   font-weight: bold;
 }
+
+.server-error h1,
+.server-error h2 {
+  text-align: center;
+}
+
+.server-error h1 {
+  font-size: 3rem;
+}
+
+.server-error h2 {
+  font-size: 2rem;
+}
