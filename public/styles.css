@@ -264,7 +264,7 @@ button[type="submit"] {
   gap: 0.5rem;
 }
 
-.item h2 {
+.item-body > h2 {
   margin: 1rem 0;
 }
 
