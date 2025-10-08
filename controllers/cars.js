@@ -41,7 +41,9 @@ const specsValidations = [
 async function carsGet(req, res) {
   const cars = await carDB.getAllCars();
 
-  res.status(200).render("cars.ejs", { title: "Cars", cars });
+  res
+    .status(200)
+    .render("cars.ejs", { title: "Cars", cars, errors: res.locals.errors });
 }
 
 const carGet = [
@@ -60,9 +62,8 @@ const carGet = [
   async function carGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .render("car.ejs", { title: "Car", errors: errors.array() });
+      res.locals.errors = errors.array();
+      return carsGet(req, res);
     }
 
     const { car, specs, brand, category } = req.locals;

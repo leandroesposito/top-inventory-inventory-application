@@ -20,7 +20,13 @@ const categoryExist = () =>
 async function categoriesGet(req, res) {
   const categories = await categoriesDB.getAllCategories();
 
-  res.status(200).render("categories.ejs", { title: "Categories", categories });
+  res
+    .status(200)
+    .render("categories.ejs", {
+      title: "Categories",
+      categories,
+      errors: res.locals.errors,
+    });
 }
 
 const categoryGet = [
@@ -29,10 +35,8 @@ const categoryGet = [
   async function categoryGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("category.ejs", {
-        title: "Category Error",
-        errors: errors.array(),
-      });
+      res.locals.errors = errors.array();
+      return categoriesGet(req, res);
     }
 
     const category = req.locals.category;

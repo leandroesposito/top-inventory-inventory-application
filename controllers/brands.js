@@ -22,7 +22,11 @@ const brandExist = () =>
 async function brandsGet(req, res) {
   const brands = await brandsDB.getAllBrands();
 
-  res.status(200).render("brands.ejs", { title: "Brands", brands });
+  res.status(200).render("brands.ejs", {
+    title: "Brands",
+    brands,
+    errors: res.locals.errors,
+  });
 }
 
 const brandGet = [
@@ -31,9 +35,8 @@ const brandGet = [
   async function brandGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .render("brand.ejs", { title: "Brand Error", errors: errors.array() });
+      res.locals.errors = errors.array();
+      return brandsGet(req, res);
     }
 
     const brand = req.locals.brand;
