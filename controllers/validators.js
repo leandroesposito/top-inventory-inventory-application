@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { body, param } = require("express-validator");
 
 const ERRORS = {
@@ -45,9 +46,19 @@ function idParamIsInt() {
     .toInt();
 }
 
+function checkPassword() {
+  return body("password").custom((value) => {
+    if (value !== process.env.ADMINPASSWORD) {
+      throw new Error("Invalid password");
+    }
+    return true;
+  });
+}
+
 module.exports = {
   createIntChain,
   createDecimalChain,
   createTextChain,
   idParamIsInt,
+  checkPassword,
 };
