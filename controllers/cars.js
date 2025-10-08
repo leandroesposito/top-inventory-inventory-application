@@ -7,6 +7,7 @@ const {
   createIntChain,
   createTextChain,
   createDecimalChain,
+  idParamIsInt,
 } = require("./validators");
 
 const carValidations = [
@@ -62,11 +63,22 @@ async function carsGet(req, res) {
 }
 
 const carGet = [
-  param("id")
-    .isInt({ min: 0 })
-    .withMessage("Id parameter must be a number")
-    .toInt(),
-  carExist(),
+  idParamIsInt(),
+  param("id").custom(async (value, { req }) => {
+    if (!Number.isInteger(value)) {
+      return;
+    }
+
+    const details = await carDB.getCarDetailsById(value);
+    if (!details) {
+      throw new Error(`Car with id ${value} doesn't exist`);
+    }
+
+    const {
+      details: { car, specs, brand, category },
+    } = details;
+    req.locals = { car, specs, brand, category };
+  }),
   async function carGet(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -157,11 +169,18 @@ const carFormPost = [
 ];
 
 const carEdit = [
-  param("id")
-    .isInt({ min: 0 })
-    .withMessage("Id parameter must be a number")
-    .toInt(),
-  carExist(),
+  idParamIsInt(),
+  param("id").custom(async (value, { req }) => {
+    const details = await carDB.getCarWithSpecsByCarId(value);
+    if (!details) {
+      throw new Error(`Car with id ${value} doesn't exist`);
+    }
+
+    const {
+      details: { car, specs },
+    } = details;
+    req.locals = { car, specs };
+  }),
   async function carEdit(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
