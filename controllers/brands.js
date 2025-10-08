@@ -5,6 +5,7 @@ const {
   createTextChain,
   createIntChain,
   idParamIsInt,
+  checkPassword,
 } = require("./validators");
 
 const validateBrand = [
@@ -65,6 +66,7 @@ async function brandFormGet(req, res) {
 }
 
 const brandFormPost = [
+  checkPassword(),
   validateBrand,
   async function brandFormPost(req, res) {
     const brand = {

@@ -8,6 +8,7 @@ const {
   createTextChain,
   createDecimalChain,
   idParamIsInt,
+  checkPassword,
 } = require("./validators");
 
 const carValidations = [
@@ -110,6 +111,7 @@ async function carFormGet(req, res) {
 }
 
 const carFormPost = [
+  checkPassword(),
   carValidations,
   specsValidations,
   async function carFormPost(req, res) {

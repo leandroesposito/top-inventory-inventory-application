@@ -1,6 +1,10 @@
 const { param, validationResult } = require("express-validator");
 const categoriesDB = require("../db/categories");
-const { createTextChain, idParamIsInt } = require("./validators");
+const {
+  createTextChain,
+  idParamIsInt,
+  checkPassword,
+} = require("./validators");
 const { getCarsByCategoryId } = require("../db/cars");
 
 const validateCategory = [
@@ -61,6 +65,7 @@ async function categoryFormGet(req, res) {
 }
 
 const categoryFormPost = [
+  checkPassword(),
   validateCategory,
   async function categoryFormPost(req, res) {
     const category = req.body;
