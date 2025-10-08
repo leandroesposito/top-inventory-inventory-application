@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
 
 const ERRORS = {
   INT: "must be integer",
@@ -38,8 +38,16 @@ function createDecimalChain(field, max, digits) {
     .withMessage(`${casedField} ${ERRORS.DECIMAL(digits)}`);
 }
 
+function idParamIsInt() {
+  return param("id")
+    .isInt({ min: 0 })
+    .withMessage("Id parameter must be a number")
+    .toInt();
+}
+
 module.exports = {
   createIntChain,
   createDecimalChain,
   createTextChain,
+  idParamIsInt,
 };
