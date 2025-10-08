@@ -27,6 +27,10 @@
         value="<%= locals.brand ? locals.brand.description : "" %>"
       />
     </div>
+    <div class="form-row">
+      <label for="password">Admin Password</label>
+      <input type="password" id="password" name="password" value="" required />
+    </div>
     <button type="submit" class="button">Submit</button>
   </form>
 <%- include("./partials/bottom_body") %>
