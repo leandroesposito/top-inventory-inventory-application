@@ -1,7 +1,11 @@
 const { param, validationResult } = require("express-validator");
 const brandsDB = require("../db/brands");
 const carsDB = require("../db/cars");
-const { createTextChain, createIntChain } = require("./validators");
+const {
+  createTextChain,
+  createIntChain,
+  idParamIsInt,
+} = require("./validators");
 
 const validateBrand = [
   createTextChain("name", 100),
@@ -34,10 +38,7 @@ async function brandsGet(req, res) {
 }
 
 const brandGet = [
-  param("id")
-    .isInt({ min: 0 })
-    .withMessage("Id parameter must be a number")
-    .toInt(),
+  idParamIsInt(),
   brandExist(),
   async function brandGet(req, res) {
     const errors = validationResult(req);
@@ -93,10 +94,7 @@ const brandFormPost = [
 ];
 
 const brandEdit = [
-  param("id")
-    .isInt({ min: 0 })
-    .withMessage("Id parameter must be a number")
-    .toInt(),
+  idParamIsInt(),
   brandExist(),
   async function brandEdit(req, res) {
     const errors = validationResult(req);

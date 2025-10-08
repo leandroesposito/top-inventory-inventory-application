@@ -1,6 +1,6 @@
 const { param, validationResult } = require("express-validator");
 const categoriesDB = require("../db/categories");
-const { createTextChain } = require("./validators");
+const { createTextChain, idParamIsInt } = require("./validators");
 const { getCarsByCategoryId } = require("../db/cars");
 
 const validateCategory = [
@@ -32,10 +32,7 @@ async function categoriesGet(req, res) {
 }
 
 const categoryGet = [
-  param("id")
-    .isInt({ min: 0 })
-    .withMessage("Id parameter must be a number")
-    .toInt(),
+  idParamIsInt(),
   categoryExist(),
   async function categoryGet(req, res) {
     const errors = validationResult(req);
@@ -89,10 +86,7 @@ const categoryFormPost = [
 ];
 
 const categoryEdit = [
-  param("id")
-    .isInt({ min: 0 })
-    .withMessage("Id parameter must be a number")
-    .toInt(),
+  idParamIsInt(),
   categoryExist(),
   async function categoryEdit(req, res) {
     const errors = validationResult(req);
