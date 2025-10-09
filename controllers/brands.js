@@ -111,10 +111,49 @@ const brandEdit = [
   },
 ];
 
+const brandDeleteGet = [
+  idParamIsInt(),
+  brandExist(),
+  async function brandDeleteGet(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors.array();
+      return brandsGet(req, res);
+    }
+
+    const brand = req.locals.brand;
+    res.status(200).render("delete.ejs", {
+      title: "Delete brand",
+      type: "brand",
+      name: brand.name,
+      action: `/brands/delete/${brand.id}`,
+    });
+  },
+];
+
+const brandDeletePost = [
+  idParamIsInt(),
+  checkPassword(),
+  brandExist(),
+  async function brandDeletePost(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors.array();
+      return brandsGet(req, res);
+    }
+
+    const brand = req.locals.brand;
+    await brandsDB.deleteBrand(brand.id);
+    res.redirect("/brands");
+  },
+];
+
 module.exports = {
   brandsGet,
   brandGet,
   brandFormGet,
   brandFormPost,
   brandEdit,
+  brandDeleteGet,
+  brandDeletePost,
 };
