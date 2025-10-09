@@ -1,0 +1,20 @@
+<%- include("./partials/upper_body.ejs") %>
+  <form action="<%= locals.action %>" method="post">
+    <div>
+      Are you sure you want to delete the <%= locals.type %>: <%= locals.name %>?
+    </div>
+    <% if (locals.type !== "car") { %>
+      <div>
+        This will also delete all the cars of <%= locals.type %>: <%= locals.name %>
+      </div>
+    <% } %>
+    <div>
+      To confirm please enter the admin password.
+    </div>
+    <div class="form-row">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password">
+    </div>
+    <button class="button" type="submit">Submit</button>
+  </form>
+<%- include("./partials/bottom_body.ejs") %>
