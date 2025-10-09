@@ -105,10 +105,49 @@ const categoryEdit = [
   },
 ];
 
+const categoryDeleteGet = [
+  idParamIsInt(),
+  categoryExist(),
+  async function categoryDeleteGet(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors.array();
+      return categoriesGet(req, res);
+    }
+
+    const category = req.locals.category;
+    res.status(200).render("delete.ejs", {
+      title: "Delete category",
+      type: "category",
+      name: category.name,
+      action: `/categories/delete/${category.id}`,
+    });
+  },
+];
+
+const categoryDeletePost = [
+  idParamIsInt(),
+  checkPassword(),
+  categoryExist(),
+  async function categoryDeletePost(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors.array();
+      return categoriesGet(req, res);
+    }
+
+    const category = req.locals.category;
+    await categoriesDB.deleteCategory(category.id);
+    res.redirect("/categories");
+  },
+];
+
 module.exports = {
   categoriesGet,
   categoryGet,
   categoryFormPost,
   categoryEdit,
   categoryFormGet,
+  categoryDeleteGet,
+  categoryDeletePost,
 };
