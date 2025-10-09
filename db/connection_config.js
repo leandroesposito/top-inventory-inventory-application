@@ -1,9 +1,5 @@
 require("dotenv").config();
 
 module.exports = {
-  user: process.env.PGUSER,
-  password: process.env.PGPASSWORD,
-  host: process.env.PGHOST,
-  port: process.env.PGPORT,
-  database: process.env.PGDATABASE,
+  connectionString: `postresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}/${process.env.PGDATABASE}?${process.env.PGPARAMS}`,
 };
