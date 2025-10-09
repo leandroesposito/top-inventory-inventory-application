@@ -46,13 +46,12 @@ const carExist = () =>
       return;
     }
 
-    const {
-      details: { car, specs },
-    } = await carDB.getCarWithSpecsByCarId(value);
+    const car = await carDB.getCarById(value);
     if (!car) {
       throw new Error(`Car with id ${value} doesn't exist`);
     }
-    req.locals = { car, specs };
+
+    req.locals = { car };
   });
 
 async function carsGet(req, res) {
@@ -196,10 +195,49 @@ const carEdit = [
   },
 ];
 
+const carDeleteGet = [
+  idParamIsInt(),
+  carExist(),
+  async function carDeleteGet(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors.array();
+      return carsGet(req, res);
+    }
+
+    const car = req.locals.car;
+    res.status(200).render("delete.ejs", {
+      title: "Delete car",
+      type: "car",
+      name: car.name,
+      action: `/cars/delete/${car.id}`,
+    });
+  },
+];
+
+const carDeletePost = [
+  idParamIsInt(),
+  checkPassword(),
+  carExist(),
+  async function carDeletePost(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors.array();
+      return carsGet(req, res);
+    }
+
+    const car = req.locals.car;
+    await carDB.deleteCar(car.id);
+    res.redirect("/cars");
+  },
+];
+
 module.exports = {
   carsGet,
   carGet,
   carFormGet,
   carFormPost,
   carEdit,
+  carDeleteGet,
+  carDeletePost,
 };
